@@ -1,0 +1,53 @@
+
+
+
+2024-05-22:
+
+Jobbade på CLI, fått addTask att korrekt ta input, saknas lite finslip hur stringen "presenteras", alltså typ hur menyn och kommand menyn visas,
+samt vad som händer när man ger dålig input.
+Att göra:
+    -> Göra klar CLI kommands
+    -> Fixa snygg meny som printas endast vid initiering av CLIn
+    -> fixa en bra help meny med flags och kommands
+    -> Nu sparas label, task, date och prio som strings, detta ska föras över till TaskUtil.Task manager sedan, och göras om till ett TaskUtil.Task med sina parameter inputs och sedan
+    läggas till i TaskUtil.Task listan. Till och börja med kanske enklast att ha ett excel dok där dom printas till för att kunna spara
+    -> Börja testa!
+
+    typ något sånt:
+------------------------------------------------------------------------------------------------------------------------------
+    help
+     usage: git [--version] [--help] [-C <path>] [-c <name>=<value>]
+                [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+                [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]
+                [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+                <command> [<args>]
+
+     These are common Git commands used in various situations:
+
+     start a working area (see also: git help tutorial)
+        clone      Clone a repository into a new directory
+        init       Create an empty Git repository or reinitialize an existing one
+
+     work on the current change (see also: git help everyday)
+        add        Add file contents to the index
+        mv         Move or rename a file, a directory, or a symlink
+        reset      Reset current HEAD to the specified state
+        rm         Remove files from the working tree and from the index
+
+     examine the history and state (see also: git help revisions)
+        bisect     Use binary search to find the commit that introduced a bug
+        grep       Print lines matching a pattern
+        log        Show commit logs
+        show       Show various types of objects
+        status     Show the working tree status
+
+------------------------------------------------------------------------------------------------------------------------------
+
+2024-05-23:
+
+    Ändrade om lite i Task strukturen. Nu finns det overloadade constructorer som gör att man kan skapa tasks utan prio eller date,
+    då dessa bör vara optional.
+    Dessutom är prio nu en Enum, där enum klassen har ett internt värde för varje element, som sedan kan returneras av en funktion så att man
+    kan köra sortering för integers på prion, och behandla den som en integer.
+
+    Första unitTestet för getLabel och getTask.
