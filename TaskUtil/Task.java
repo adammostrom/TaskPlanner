@@ -17,26 +17,25 @@ public class Task {
 
     private int id;
 
-    // List of id numbers, in order to prevent duplicate numbers.
-    public static Set <Integer > idSet = new HashSet<>();
 
 
-    public Task (String task, String label, int date, Priority priority){
+
+    public Task (String task, String label, Priority priority, int date, int id){
         this.task       = task;
         this.label      = label;
         this.date       = date;
         this.priority   = priority;
-        this.id         = randomNum();
+        this.id         = id;
     }
 
-    public Task (String task, String label){
-        this(task, label,0,Priority.NA);
+    public Task (String task, String label, int id){
+        this(task, label, Priority.NA,0, id);
     }
-    public Task (String task, String label, int date){
-        this(task, label, date, Priority.NA);
+    public Task (String task, String label, int date, int id){
+        this(task, label, Priority.NA, date, id);
     }
-    public Task (String task, String label, Priority priority){
-        this(task, label, 0, priority);
+    public Task (String task, String label, Priority priority, int id){
+        this(task, label, priority,0, id);
     }
 
 
@@ -60,20 +59,5 @@ public class Task {
         return this.task;
     }
 
-    public Set <Integer> getIdSet(){
-        return idSet;
-    }
 
-    public static Random rand = new Random();
-    private int randomNum(){
-        // Create a random number
-        int number = rand.nextInt(1000);
-        // Check, if it is already in set, we create a new one
-        while(idSet.contains(number)) {
-            number = rand.nextInt(1000);
-        }
-        // When we exit loop (list doesn't contain number) we add it to the set and return it.
-            idSet.add(number);
-            return number;
-    }
 }

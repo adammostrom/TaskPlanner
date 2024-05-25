@@ -21,7 +21,7 @@ public class Main {
         int prio = 1;
 
         // Check if the TaskUtil.Task class has a constructor that accepts the specified arguments
-        Task task = new Task(desc, label, date, Priority.LOW);
+        Task task = new Task(desc, label, Priority.LOW,date);
 
         List<Task> tasks = new ArrayList<>();
 
