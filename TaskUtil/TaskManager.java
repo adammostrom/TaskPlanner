@@ -24,9 +24,19 @@ public class TaskManager {
     }
 
     public boolean removeTask(int id) {
+        Task.idSet.remove(id);
         return (tasks.removeIf(task -> task.getId() == id));
     }
 
+    public void createTask(String task, String label, Priority prio, int date){
+        if(task && label){
+            createTaskHelper(task, label);
+        }
+    }
+    @Override
+    private void createTaskHelper(String task, String label){
+        Task newtask = new Task (task, label);
+    }
 
     public void sortTaskHelper(String command){
         switch (command) {

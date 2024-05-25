@@ -1,6 +1,6 @@
 package TaskUtil;
 
-import java.util.Random;
+import java.util.*;
 
 
 public class Task {
@@ -17,6 +17,8 @@ public class Task {
 
     private int id;
 
+    // List of id numbers, in order to prevent duplicate numbers.
+    public static Set <Integer > idSet = new HashSet<>();
 
 
     public Task (String task, String label, int date, Priority priority){
@@ -58,9 +60,20 @@ public class Task {
         return this.task;
     }
 
-    
+    public Set <Integer> getIdSet(){
+        return idSet;
+    }
+
+    public static Random rand = new Random();
     private int randomNum(){
-        Random rand = new Random();
-        return rand.nextInt(1000);
+        // Create a random number
+        int number = rand.nextInt(1000);
+        // Check, if it is already in set, we create a new one
+        while(idSet.contains(number)) {
+            number = rand.nextInt(1000);
+        }
+        // When we exit loop (list doesn't contain number) we add it to the set and return it.
+            idSet.add(number);
+            return number;
     }
 }

@@ -42,3 +42,17 @@ Att göra:
         status     Show the working tree status
 
 ------------------------------------------------------------------------------------------------------------------------------
+
+2024-05-23:
+
+    Ändrade om lite i Task strukturen. Nu finns det overloadade constructorer som gör att man kan skapa tasks utan prio eller date,
+    då dessa bör vara optional.
+    Dessutom är prio nu en Enum, där enum klassen har ett internt värde för varje element, som sedan kan returneras av en funktion så att man
+    kan köra sortering för integers på prion, och behandla den som en integer.
+
+    Första unitTestet för getLabel och getTask.
+
+
+2024 -05-25:
+    la till idSet i task, samt en check i randomNum() för att kolla så att ett id inte är duplicate
+    La också till att removetask i task manager tar bort id nummert från idSet
