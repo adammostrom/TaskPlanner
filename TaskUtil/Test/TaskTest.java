@@ -17,31 +17,31 @@ public class TaskTest {
     @Test
     public void createTaskTest() {
         // Create a new TaskUtil.Task object
-        Task task = new Task ("FirstTest", "TestLabel");
+        Task task = taskManager.createTask("TestCreateTask", "testLabel");
         // Perform assertions to check if the task was created correctly
-        assertNotNull(task, "TaskUtil.Task should not be null");
-        Assertions.assertEquals(task.getTask(), "FirstTest");
-        Assertions.assertEquals(task.getLabel(), "TestLabel");
+        assertNotNull(taskManager, "TaskUtil.Task should not be null");
+        Assertions.assertEquals(task.getTask(), "TestCreateTask");
+        Assertions.assertEquals(task.getLabel(), "testLabel");
 
     }
 
 
     @Test
     public void checkIdNumberInSet(){
-        Task task = new Task("Testing id number", "Testlabel");
+        Task task = taskManager.createTask("Testing id number", "Testlabel");
         int idnum = task.getId();
         System.out.println(idnum);
-        assertTrue(task.getIdSet().contains(idnum));
+        assertTrue(taskManager.getIdSet().contains(idnum));
 
     }
 
 
     @Test
     public void checkRemoveTaskIdNumberDeleteFromSet(){
-        Task task = new Task("Testing remove ID from set", "Testlabel");
-        assertTrue(Task.idSet.contains(task.getId()));
+        Task task = taskManager.createTask("Testing remove ID from set", "Testlabel");
+        assertTrue(TaskManager.idSet.contains(task.getId()));
         int number = task.getId();
         taskManager.removeTask(task.getId());
-        assertFalse(Task.idSet.contains(number));
+        assertFalse(TaskManager.idSet.contains(number));
     }
 }
