@@ -4,48 +4,71 @@ import java.util.*;
 
 public class TaskManager {
 
-    // List of id numbers, in order to prevent duplicate numbers.
-    public static Set <Integer > idSet = new HashSet<>();
-    private List<Task> tasks;
 
+
+    // Tasks are put in the set as key = id, and value = the task itself.
+    public HashMap<Integer, Task> tasksMap;
     public TaskManager() {
-        this.tasks = new ArrayList<>();
+        this.tasksMap = new HashMap<>();
+    }
+
+
+    /************** TASK ID LOGIC **************/
+
+    public static Random rand = new Random();
+    private int randomNum(){
+        // Create a random number
+        int number = rand.nextInt(1000);
+        // Check, if it is already in set, we create a new one
+        while(tasksMap.containsKey(number)) {
+            number = rand.nextInt(1000);
+        }
+        // When we exit loop (list doesn't contain number) we add it to the set and return it.
+
+        return number;
     }
 
     public Optional<Task> getTask(int id) {
-        return tasks.stream().filter(task -> task.getId() == id).findFirst();
+        if(!tasksMap.containsKey(id)){
+            throw new IllegalArgumentException("ID does not exist");
+        }
+        Task task = tasksMap.get(id);
+        if (task == null) {
+            throw new IllegalArgumentException("No task matching given ID");
+        }
+        return Optional.of(task);
     }
 
-    public void addTask(Task task) {
-        tasks.add(task);
-    }
-
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public boolean removeTask(int id) {
-        idSet.remove(id);
-        return (tasks.removeIf(task -> task.getId() == id));
+    public void deleteTask(int id) {
+        if (tasksMap.containsKey(id)) {
+            tasksMap.remove(id);
+        } else {
+            throw new IllegalArgumentException("No task matching given ID");
+        }
     }
 
 
     // wrapper for creating a task
-    public Task createTask(String task, String label, Priority priority, int date){
+    public int createTask(String task, String label, Priority priority, int date){
         // task and label must be assigned for a new task. (label is like "todo", "doing")
         if(task!= null && !task.isEmpty() && label != null && !label.isEmpty()){
-        return new Task (task, label, priority, date, randomNum());
+        Task temporary_var = new Task (task, label, priority, date, randomNum());
+        int id = randomNum();
+        tasksMap.put(id, temporary_var); // Puts the task created in the hashmap, it will look like:
+            // (745: {task, label, prio, date})
+        return id;
+
         }
         throw new IllegalArgumentException("Task and label must be assigned");
     }
 
-    public Task createTask (String task, String label){
+    public int createTask (String task, String label){
         return createTask (task, label, Priority.NA, 0);
     }
-    public Task createTask (String task, String label, int date){
+    public int createTask (String task, String label, int date){
         return createTask (task, label, Priority.NA, date);
     }
-    public Task createTask (String task, String label, Priority priority){
+    public int createTask (String task, String label, Priority priority){
         return createTask (task, label, priority, 0);
     }
 
@@ -62,38 +85,9 @@ public class TaskManager {
     }
 
     public void sortPrio(boolean ascending) {
-
-        Collections.sort(tasks, new Comparator<Task>() {
-            @Override
-            public int compare(Task o1, Task o2) {
-                if (ascending) {
-                    return Integer.compare(o1.getPrio().getValue(), o2.getPrio().getValue());
-                } else {
-                    return Integer.compare(o2.getPrio().getValue(), o1.getPrio().getValue());
-                }
-            }
-        });
     }
 
 
-    /************** TASK ID LOGIC **************/
-    public Set <Integer> getIdSet(){
-        return idSet;
-    }
 
-    public static Random rand = new Random();
-    private int randomNum(){
-        // Create a random number
-        int number = rand.nextInt(1000);
-        // Check, if it is already in set, we create a new one
-        while(idSet.contains(number)) {
-            number = rand.nextInt(1000);
-        }
-        // When we exit loop (list doesn't contain number) we add it to the set and return it.
-        idSet.add(number);
-        return number;
-    }
-
-    /* WRAPPERS FOR ALL GETTERS */
 
 }
