@@ -56,3 +56,4 @@ Att göra:
 2024 -05-25:
     la till idSet i task, samt en check i randomNum() för att kolla så att ett id inte är duplicate
     La också till att removetask i task manager tar bort id nummert från idSet
+

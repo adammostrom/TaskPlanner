@@ -13,8 +13,8 @@ public class Task {
     // Optional parameters:
     private Priority priority;
     private int date = 0;
-    boolean isDate = false;
 
+    // assigned by TaskManager
     private int id;
 
 
