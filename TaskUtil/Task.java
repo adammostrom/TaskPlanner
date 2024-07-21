@@ -3,7 +3,7 @@ package TaskUtil;
 import java.util.*;
 
 
-public class Task {
+public class Task implements Comparable <Task>{
 
 
     // Required parameters:
@@ -43,7 +43,7 @@ public class Task {
         return this.id;
     }
 
-    public Priority getPrio(){
+    public Priority getPriority(){
         return this.priority;
     }
 
@@ -55,9 +55,13 @@ public class Task {
         return this.label;
     }
 
-    public String getTask(){
+    public String getTitle(){
         return this.task;
     }
 
 
+    @Override
+    public int compareTo(Task other) {
+        return this.priority.compareTo(other.getPriority());
+    }
 }

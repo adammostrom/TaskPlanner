@@ -38,6 +38,16 @@ public class TaskManager {
         }
         return Optional.of(task);
     }
+    public Task getTaskV2(int id){
+        if (!tasksMap.containsKey(id)){
+            throw new IllegalArgumentException("ID does not exist");
+        }
+        Task task = tasksMap.get(id);
+        if(task == null){
+            throw new IllegalArgumentException("No task matching given ID");
+        }
+        return task;
+    }
 
     public void deleteTask(int id) {
         if (tasksMap.containsKey(id)) {
@@ -72,19 +82,24 @@ public class TaskManager {
         return createTask (task, label, priority, 0);
     }
 
-    public void sortTaskHelper(String command){
-        switch (command) {
-            case "prio a":
-                sortPrio(true);
-                break;
-            case "prio d":
-                sortPrio(false);
-                break;
-            default: sortPrio(true);
-        }
-    }
 
-    public void sortPrio(boolean ascending) {
+
+
+
+
+
+    // Sort low to high
+    public List <Task> sortLH(){
+        List<Task> sorted_tasks_by_priority = new ArrayList<>(tasksMap.values());
+        Collections.sort(sorted_tasks_by_priority);
+        return sorted_tasks_by_priority;
+    }
+    // Sort High to Low.
+    public List<Task> sortHL(){
+        List<Task> sorted_tasks_by_priority = new ArrayList<>(tasksMap.values());
+        Collections.sort(sorted_tasks_by_priority);
+        Collections.reverse(sorted_tasks_by_priority);
+        return sorted_tasks_by_priority;
     }
 
 
