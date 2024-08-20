@@ -1,3 +1,5 @@
+package UserInterface;
+
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
@@ -9,7 +11,7 @@ public class MainFrame extends JFrame {
     private JPanel mainPanel;
 
     public MainFrame() {
-        setTitle("Main Frame");
+        setTitle("src.Main Frame");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

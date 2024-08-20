@@ -28,6 +28,13 @@ public class TaskManager {
         return number;
     }
 
+    /**
+     * BÖR FÖRMODLIGEN ÄNDRA DESSA GET TASK SÅ ATT DE INTE ÄR DEM SOM SKAPAR ETT TASK, UTAN ENDAST HÄMTAR TASK SOM FINNS I MAPPEN.
+     * @param id
+     * @return
+     */
+
+    //////////////////////////////////////////// UNDER CONSTRUCTION \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     public Optional<Task> getTask(int id) {
         if(!tasksMap.containsKey(id)){
             throw new IllegalArgumentException("ID does not exist");
@@ -49,12 +56,19 @@ public class TaskManager {
         return task;
     }
 
+    /////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     public void deleteTask(int id) {
         if (tasksMap.containsKey(id)) {
             tasksMap.remove(id);
         } else {
             throw new IllegalArgumentException("No task matching given ID");
         }
+    }
+
+    public void displatAllTasks(){
+        tasksMap.forEach((key, value) -> {
+            System.out.println("Key: " + key + ", Value: " + value);
+        });
     }
 
 
