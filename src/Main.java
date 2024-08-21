@@ -1,16 +1,18 @@
 package src;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import CLI.CLI;
 import TaskUtil.ConsoleDisplayer;
 import TaskUtil.Priority;
 import TaskUtil.Task;
 import TaskUtil.TaskManager;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Main {
 
+
+    // TO RUN, GO TO ROOT OF FOLDER STRCUTRE -> java -cp TaskPlanner/out/production/JavaTaskPlanner src.Main
 
     public static void main(String[] args) {
 
