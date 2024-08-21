@@ -1,6 +1,11 @@
 package TaskUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 
 public class TaskManager {
 
@@ -16,16 +21,12 @@ public class TaskManager {
     /************** TASK ID LOGIC **************/
 
     public static Random rand = new Random();
-    private int randomNum(){
-        // Create a random number
-        int number = rand.nextInt(1000);
-        // Check, if it is already in set, we create a new one
-        while(tasksMap.containsKey(number)) {
-            number = rand.nextInt(1000);
-        }
-        // When we exit loop (list doesn't contain number) we add it to the set and return it.
-
-        return number;
+    private int generateUniqueId() {
+        int id;
+        do {
+            id = rand.nextInt(1000); // Generate a random number
+        } while (tasksMap.containsKey(id)); // Check if the ID is already in use
+        return id;
     }
 
     /**
@@ -65,23 +66,24 @@ public class TaskManager {
         }
     }
 
-    public void displatAllTasks(){
+    public void displayAllTasks() {
+        System.out.println("Number of tasks: " + tasksMap.size());
         tasksMap.forEach((key, value) -> {
             System.out.println("Key: " + key + ", Value: " + value);
         });
     }
+    
 
 
     // wrapper for creating a task
-    public int createTask(String task, String label, Priority priority, int date){
-        // task and label must be assigned for a new task. (label is like "todo", "doing")
-        if(task!= null && !task.isEmpty() && label != null && !label.isEmpty()){
-        Task temporary_var = new Task (task, label, priority, date, randomNum());
-        int id = randomNum();
-        tasksMap.put(id, temporary_var); // Puts the task created in the hashmap, it will look like:
-            // (745: {task, label, prio, date})
-        return id;
-
+    public int createTask(String task, String label, Priority priority, int date) {
+        if (task != null && !task.isEmpty() && label != null && !label.isEmpty()) {
+            int id = generateUniqueId(); // Generate a unique ID
+            Task newTask = new Task(task, label, priority, date, id);
+            
+            tasksMap.put(id, newTask); // Add the task to the map
+            System.out.println("Added task with ID " + id + ": " + newTask);
+            return id;
         }
         throw new IllegalArgumentException("Task and label must be assigned");
     }

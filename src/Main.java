@@ -27,14 +27,18 @@ public class Main {
 
         // Check if the TaskUtil.Task class has a constructor that accepts the specified arguments
         // MOCK TASKS
+        // NOTE ATT SISTA PARAMETERN STÅR SOM ID OCH INTE SOM DATE!!!!!
         Task task = new Task(desc, label, Priority.LOW,date);
         Task task2 = new Task("TEST02", "TODO", Priority.HIGH, date);
         Task task3 = new Task ("Finish Database Exercises 3", "TO DO", Priority.HIGH, date);
 
         TaskManager TM = new TaskManager();
 
+
+
         TM.createTask("TEST04", "TODO", Priority.HIGH);
-        TM.displatAllTasks();
+        TM.createTask("TEST05", "DOING", Priority.MEDIUM);
+        TM.displayAllTasks();
 
 
 
