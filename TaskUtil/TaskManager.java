@@ -18,6 +18,11 @@ public class TaskManager {
     }
 
 
+    private  List <Task> tasks;
+
+    
+
+
     /************** TASK ID LOGIC **************/
 
     public static Random rand = new Random();
@@ -66,12 +71,6 @@ public class TaskManager {
         }
     }
 
-    public void displayAllTasks() {
-        System.out.println("Number of tasks: " + tasksMap.size());
-        tasksMap.forEach((key, value) -> {
-            System.out.println("Key: " + key + ", Value: " + value);
-        });
-    }
     
 
 
@@ -82,7 +81,6 @@ public class TaskManager {
             Task newTask = new Task(task, label, priority, date, id);
             
             tasksMap.put(id, newTask); // Add the task to the map
-            System.out.println("Added task with ID " + id + ": " + newTask);
             return id;
         }
         throw new IllegalArgumentException("Task and label must be assigned");
@@ -101,8 +99,14 @@ public class TaskManager {
 
 
 
+    public List <Task> exportMapToList(HashMap<Integer, Task> tasksMap){
+        return tasks = new ArrayList<>(tasksMap.values());
+    }
 
 
+
+
+    // SORT BÖR FINNAS I DISPLAYER ( VIEW MODEL )
 
     // Sort low to high
     public List <Task> sortLH(){

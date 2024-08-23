@@ -1,10 +1,29 @@
 package TaskUtil;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ConsoleDisplayer {
 
-    public static void displayTasks(List<Task> tasks) {
+    
+    public void sortTasksByPriority(List<Task> tasks) {
+        Collections.sort(tasks, new Comparator<Task>() {
+            @Override
+            public int compare(Task t1, Task t2) {
+                // Assuming higher priority value means higher priority; adjust as needed
+                return Integer.compare(t2.getPriority().getValue(), t1.getPriority().getValue());
+            }
+        });
+        displayTasks(tasks);
+    }
+ 
+
+
+
+    public static void displayTasks(List <Task> tasks) {
+    
+
         // Determine the maximum width for each column
         int idWidth = "ID".length();
         int titleWidth = "Description/title".length();
@@ -37,4 +56,6 @@ public class ConsoleDisplayer {
         // Print footer
         System.out.println(separator);
     }
+
+
 }

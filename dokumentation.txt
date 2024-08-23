@@ -57,3 +57,9 @@ Att göra:
     la till idSet i task, samt en check i randomNum() för att kolla så att ett id inte är duplicate
     La också till att removetask i task manager tar bort id nummert från idSet
 
+2024 - 08 -22:
+TASKMANAGER är ju egentligen ett Board, alltså ett kanban board, så vid startup har man en möjlighet att välja vilket
+board man vill öppna, samt skapa nytt/ta bort. varje board har sin egen hashmap som håller tasks. Databasen
+kan hålla alla tasks i ett och samma table, dock med ytterliggare en parameter som är "board-tag", inte säker ännu.
+
+Ha ett statiskt board med listan äver tasks, när man ändrar något ska den bara refreshas, inte printa ny.

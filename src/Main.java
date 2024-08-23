@@ -1,14 +1,11 @@
 package src;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import CLI.CLI;
 import TaskUtil.ConsoleDisplayer;
 import TaskUtil.Priority;
-import TaskUtil.Task;
 import TaskUtil.TaskManager;
 
+
+// MOSTLY FOR TESTING, PROGRAM SHOULD RUN FROM CLI
 public class Main {
 
 
@@ -16,39 +13,31 @@ public class Main {
 
     public static void main(String[] args) {
 
-        CLI cli = new CLI();
 
-
-
-        String desc = "First task";
-        String label = "test";
-        int date = 9;
-        int prio = 1;
-
-        // Check if the TaskUtil.Task class has a constructor that accepts the specified arguments
-        // MOCK TASKS
-        // NOTE ATT SISTA PARAMETERN STÅR SOM ID OCH INTE SOM DATE!!!!!
-        Task task = new Task(desc, label, Priority.LOW,date);
-        Task task2 = new Task("TEST02", "TODO", Priority.HIGH, date);
-        Task task3 = new Task ("Finish Database Exercises 3", "TO DO", Priority.HIGH, date);
-
+        // Taskmanager is like a kanban board
         TaskManager TM = new TaskManager();
 
+        TaskManager TM2 = new TaskManager();
 
 
+
+        TM.createTask("TEST07", "DOING", Priority.HIGH);
         TM.createTask("TEST04", "TODO", Priority.HIGH);
         TM.createTask("TEST05", "DOING", Priority.MEDIUM);
-        TM.displayAllTasks();
+        TM.createTask("TEST06", "DOING", Priority.LOW);
+        TM.createTask("TEST07", "DOING", Priority.LOW);
+        TM.createTask("TEST08", "DOING", Priority.HIGH);
 
+        TM2.createTask("TEST NEW BOARD", "SOMETIMES THE LABEL NEED TO BE LONG ALSO", Priority.HIGH);
+        TM2.createTask("TEST NEW BOARD HOPE IT WORKS NO PRIO OPS MAYBE TOO LONG I DONT KNOW","DOING", 20240823);
 
-
-        List<Task> tasks = new ArrayList<>();
-
-        tasks.add(task2);
-        tasks.add(task);
-        tasks.add(task3);
         ConsoleDisplayer cd = new ConsoleDisplayer();
-        cd.displayTasks(tasks);
+        cd.displayTasks(TM.exportMapToList(TM.tasksMap));
+        cd.displayTasks(TM2.exportMapToList(TM2.tasksMap));
+
+        cd.sortTasksByPriority(TM.exportMapToList(TM.tasksMap));
+
+        
 
     }
 }
